@@ -13,8 +13,8 @@ namespace Application.Interfaces
         Task<IEnumerable<ContractDTO>> ReadContracsDTOAsync();
         Task<ContractDTO> ReadContractDTOByIdAsync(int id);
         Task<IEnumerable<ContractDTO>> ReadContractDTOByNameAsync(string name);
-        Task UpdateContractDTOAsync(ContractDTO contract);
+        Task UpdateContractDTOAsync(ContractDTO contractDTO);
         Task UpdateContractDTOTotalHoursAsync(int? id);
-        Task DeleteContractDTOAsync(ContractDTO contract);
+        Task DeleteContractDTOAsync(int id);
     }
 }

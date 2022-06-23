@@ -11,6 +11,8 @@ namespace Infra.Data.EntitiesConfiguration
             builder.HasKey(p => p.Id);
             builder.Property(p => p.StartTime).IsRequired();
             builder.Property(p => p.ContractId).IsRequired();
+
+            builder.HasOne(e => e.Contract).WithMany(e => e.TimeLogs).HasForeignKey(e => e.ContractId);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Application.Interfaces
         Task CreateTimeLogDTOAsync(int id);
         Task<IEnumerable<TimeLogDTO>> ReadTimeLogDTOsAsync();
         Task<TimeLogDTO> ReadTimeLogDTOByIdAsync(int id);
-        Task<TimeLogDTO> UpdateTimeLogDTOHourExitAsync(int id);
-        Task<TimeLogDTO> DeleteTimeLogDTOAsync(int id);
+        Task UpdateTimeLogDTOHourExitAsync(int id);
+        Task DeleteTimeLogDTOAsync(int id);
     }
 }

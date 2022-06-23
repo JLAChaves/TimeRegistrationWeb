@@ -46,17 +46,6 @@ namespace Domain.Tests
         }
 
         [Fact]
-        public void CreateTimeLog_UpdateHoursMethodWithoutValidParameters_DomainExceptionHoursNull()
-        {
-            TimeLog timeLog = new TimeLog(DateTime.ParseExact("22/06/2022", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                                                DateTime.ParseExact("23/06/2022", "dd/MM/yyyy", CultureInfo.InvariantCulture));
-
-            Action action = () => timeLog.UpdateHours(0);
-            action.Should().Throw<Domain.Validation.DomainExceptionValidation>()
-                .WithMessage("Value Not Updated!");
-        }
-
-        [Fact]
         public void CreateTimeLog_UpdateEndTimeMethodWithValidParameters_ResultObjectValidState()
         {
             TimeLog timeLog = new TimeLog(DateTime.ParseExact("22/06/2022", "dd/MM/yyyy", CultureInfo.InvariantCulture),

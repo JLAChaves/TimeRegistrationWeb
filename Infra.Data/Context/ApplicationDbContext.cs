@@ -17,6 +17,7 @@ namespace Infra.Data.Context
 
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<TimeLog> TimeLogs { get; set; }
+        public IEnumerable<object> TimesLogs { get; internal set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

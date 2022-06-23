@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Contract : EntityBase
+    public sealed class Contract : EntityBase
     {
-        public string? Name { get; set; }
-        public double ValuePerHour { get; set; }
-        public double? TotalValue { get; set; }
-        public double? TotalHours { get; set; }
+        public string? Name { get; private set; }
+        public double ValuePerHour { get; private set; }
+        public double? TotalValue { get; private set; }
+        public double? TotalHours { get; private set; }
         public ICollection<TimeLog>? TimeLogs { get; set; }
 
         public Contract(string name, double valuePerHour)
@@ -27,6 +27,23 @@ namespace Domain.Entities
             ValidateDomain(name, valuePerHour);
         }
 
+        public Contract UpdateTotalValue(double? totalValue)
+        {
+            TotalValue = totalValue;
+            DomainExceptionValidation.When(this.TotalValue == null || this.TotalValue == 0,
+                "Value Not Updated!");
+
+            return this;
+        }
+
+        public Contract UpdateTotalHours(double? totalHours)
+        {
+            TotalHours = totalHours;
+            DomainExceptionValidation.When(this.TotalHours == null || this.TotalHours == 0,
+                "Value Not Updated!");
+
+            return this;
+        }
 
         private void ValidateDomain(string name, double valuePerHour)
         {

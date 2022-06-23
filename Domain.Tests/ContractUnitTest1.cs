@@ -15,6 +15,25 @@ namespace Domain.Tests
         }
 
         [Fact]
+        public void UpdateTotalValue_UsingUpdateTotalValueMethodWithValidParameters_ResultObjectWithTotalValueNotNull()
+        {
+            Contract contract = new Contract("House Games", 20);
+
+            Action action = () => contract.UpdateTotalValue(50);
+            action.Should().NotThrow<Domain.Validation.DomainExceptionValidation>();
+        }
+
+        [Fact]
+        public void UpdateTotalValue_UsingUpdateTotalValueMethodWithoutValidParameters_DomainExceptionTotalValueNull()
+        {
+            Contract contract = new Contract("House Games", 20);
+
+            Action action = () => contract.UpdateTotalValue(0);
+            action.Should().Throw<Domain.Validation.DomainExceptionValidation>()
+                .WithMessage("Value Not Updated!");
+        }
+
+        [Fact]
         public void CreateContract_WithValuePerHourNegative_DomainExceptionNegativeValue()
         {
             Action action = () => new Contract(1, "HouseGames", -10);
@@ -44,6 +63,24 @@ namespace Domain.Tests
             Action action = () => new Contract(1, "Ho", 20);
             action.Should().Throw<Domain.Validation.DomainExceptionValidation>()
                 .WithMessage("Minimun Three Characters Required!");
+        }
+
+        [Fact]
+        public void UpdateTotalHours_UsingUpdateTotalHoursMethodWithValidParameters_ResultObjectWithTotalHoursNotNull()
+        {
+            Contract contract = new Contract("House Games", 20);
+
+            Action action = () => contract.UpdateTotalHours(2.5);
+            action.Should().NotThrow<Domain.Validation.DomainExceptionValidation>();
+        }
+
+        [Fact]
+        public void UpdateTotalHours_UsingUpdateTotalHoursMethodWithoutValidParameters_DomainExceptionTotalHoursNull()
+        {
+            Contract contract = new Contract("House Games", 20);
+            Action action = () => contract.UpdateTotalHours(0);
+            action.Should().Throw<Domain.Validation.DomainExceptionValidation>()
+                .WithMessage("Value Not Updated!");
         }
     }
 }

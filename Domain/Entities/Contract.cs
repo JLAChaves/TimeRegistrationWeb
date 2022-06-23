@@ -15,19 +15,20 @@ namespace Domain.Entities
         public double? TotalHours { get; set; }
         public ICollection<TimeLog>? TimeLogs { get; set; }
 
-        public Contract(string name, double valuePerHour, double totalValue, double totalHours)
+        public Contract(string name, double valuePerHour)
         {
-            ValidateDomain(name, valuePerHour, totalValue, totalHours);
+            ValidateDomain(name, valuePerHour);
         }
 
-        public Contract(int id, string name, double valuePerHour, double totalValue, double totalHours)
+        public Contract(int id, string name, double valuePerHour)
         {
             DomainExceptionValidation.When(id < 0, "Invalid Id Value");
             Id = id;
-            ValidateDomain(name, valuePerHour, totalValue, totalHours);
+            ValidateDomain(name, valuePerHour);
         }
 
-        private void ValidateDomain(string name, double valuePerHour, double totalValue, double totalHours)
+
+        private void ValidateDomain(string name, double valuePerHour)
         {
             DomainExceptionValidation.When(string.IsNullOrEmpty(name), 
                 "Name Is Required!");
@@ -40,8 +41,6 @@ namespace Domain.Entities
 
             Name = name;
             ValuePerHour = valuePerHour;
-            TotalValue = totalValue;
-            TotalHours = totalHours;
         }
     }
 }

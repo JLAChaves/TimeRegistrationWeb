@@ -10,26 +10,25 @@ namespace Domain.Entities
         public int ContractId { get; set; }
         public Contract? Contract { get; set; }
 
-        public TimeLog(DateTime startTime, DateTime endTime, double hours)
+        public TimeLog(DateTime startTime, DateTime endTime)
         {
-            ValidateDomain(startTime, endTime, hours);
+            ValidateDomain(startTime, endTime);
         }
 
-        public TimeLog(int id, DateTime startTime, DateTime endTime, double hours)
+        public TimeLog(int id, DateTime startTime, DateTime endTime)
         {
             DomainExceptionValidation.When(id < 0, "Invalid Id Value");
             Id = id;
-            ValidateDomain(startTime, endTime, hours);
+            ValidateDomain(startTime, endTime);
         }
 
-        private void ValidateDomain(DateTime startTime, DateTime endTime, double hours)
+        private void ValidateDomain(DateTime startTime, DateTime endTime)
         {
             DomainExceptionValidation.When(startTime > endTime,
                 "Time Conflict! Work Start Time is Greater Than End Time");
 
             StartTime = startTime;
             EndTime = endTime;
-            Hours = hours;
         }
     }
 }

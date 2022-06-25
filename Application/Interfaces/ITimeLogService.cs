@@ -11,8 +11,8 @@ namespace Application.Interfaces
     {
         Task CreateTimeLogDTOAsync(int id);
         Task<IEnumerable<TimeLogDTO>> ReadTimeLogDTOsAsync();
-        Task<TimeLogDTO> ReadTimeLogDTOByIdAsync(int id);
-        Task UpdateTimeLogDTOHourExitAsync(int id);
+        Task<IEnumerable<TimeLogDTO>> ReadTimeLogsDTOByIdAsync(int id);
+        //Task UpdateTimeLogDTOHourExitAsync(TimeLogDTO timeLogDTO);
         Task DeleteTimeLogDTOAsync(int id);
     }
 }

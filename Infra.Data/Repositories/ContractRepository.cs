@@ -50,7 +50,6 @@ namespace Infra.Data.Repositories
             _contractContext.Update(contract);
             await _contractContext.SaveChangesAsync();
             return contract;
-
         }
 
         public double? TotalHours(int? id)

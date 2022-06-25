@@ -10,7 +10,6 @@ namespace Application.Services
     {
         private readonly ITimeLogRepository _timeLogRepository;
         private readonly IMapper _mapper;
-        private object contractDTO;
 
         public TimeLogService(ITimeLogRepository timeLogRepository, IMapper mapper)
         {
@@ -27,14 +26,10 @@ namespace Application.Services
             var timeLogEntity = await _timeLogRepository.ReadTimeLogsAsync();
             return _mapper.Map<IEnumerable<TimeLogDTO>>(timeLogEntity);
         }
-        public async Task<TimeLogDTO> ReadTimeLogDTOByIdAsync(int id)
+        public async Task<IEnumerable<TimeLogDTO>> ReadTimeLogsDTOByIdAsync(int id)
         {
-            var timeLogEntity = _timeLogRepository.ReadTimeLogByIdAsync(id);
-            return _mapper.Map<TimeLogDTO>(timeLogEntity);
-        }
-        public async Task UpdateTimeLogDTOHourExitAsync(int id)
-        {
-            await _timeLogRepository.UpdateTimeLogHourExitAsync(id);
+            var timeLogEntity = await _timeLogRepository.ReadTimeLogsByContractIdAsync(id);
+            return _mapper.Map<IEnumerable<TimeLogDTO>>(timeLogEntity);
         }
         public async Task DeleteTimeLogDTOAsync(int id)
         {

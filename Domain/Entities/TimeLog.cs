@@ -8,11 +8,13 @@ namespace Domain.Entities
         public DateTime EndTime { get; private set; }
         public double? Hours { get; private set; }
         public int ContractId { get; private set; }
+        public bool IsActual { get; private set; }
         public Contract? Contract { get; set; }
 
         public TimeLog(DateTime startTime, DateTime endTime)
         {
-            DomainExceptionValidation.When(startTime > endTime, "Time Conflict! Work Start Time is Greater Than End Time"); 
+            DomainExceptionValidation.When(startTime > endTime, "Time Conflict! Work Start Time is Greater Than End Time");
+            IsActual = true;
             StartTime = startTime;
             EndTime = endTime;
         }
@@ -25,6 +27,7 @@ namespace Domain.Entities
                 "Time Conflict! Work Start Time is Greater Than End Time");
 
             Id = id;
+            IsActual = true;
             StartTime = startTime;
             EndTime = endTime;
         }
@@ -35,6 +38,7 @@ namespace Domain.Entities
             DomainExceptionValidation.When(startTime > endTime,
                 "Time Conflict! Work Start Time is Greater Than End Time");
 
+            IsActual = true;
             StartTime = startTime;
             EndTime = endTime;
             ContractId = contractId;
@@ -43,6 +47,7 @@ namespace Domain.Entities
         public TimeLog UpdateEndTime(DateTime endTime)
         {
             this.EndTime = endTime;
+            this.IsActual = false;
 
             DomainExceptionValidation.When(this.StartTime > this.EndTime, 
                 "Time Conflict! Work Start Time is Greater Than End Time");
@@ -57,5 +62,6 @@ namespace Domain.Entities
                 "Value Not Updated!");
             return this;
         }
+        
     }
 }

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Application.DTOs.TimeLogDTO>
+
+@{
+    ViewData["Title"] = "Contract Management";
+}
+
+<div>
+    <h2>@ViewData["Title"]</h2>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <div class="pull-left">
+                <a asp-action="Create" class="btn btn-primary">
+                    <span title="Register New" class="fas fa-plus"></span> Register New
+                </a>
+
+                <a asp-controller=TimeLogs asp-action="RegisterTimeLog" asp-route-id="@Model.First(p => p.ContractId > 0).ContractId" title="Index" class="btn btn-warning">
+                            <span class="fas fa-edit">Register TimeLog</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="panel panel-default">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hours)
+                </th>                                
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hours)
+                    </td>                    
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

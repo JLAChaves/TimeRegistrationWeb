@@ -17,7 +17,6 @@ namespace Application.Services
             _mapper = mapper;
         }
 
-
         public async Task CreateContractDTOAsync(ContractDTO contractDTO)
         {
             var contractEntity = _mapper.Map<Contract>(contractDTO);

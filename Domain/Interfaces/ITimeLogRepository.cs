@@ -6,8 +6,8 @@ namespace Domain.Interfaces
     {
         Task<TimeLog> CreateTimeLogAsync(int id);
         Task<IEnumerable<TimeLog>> ReadTimeLogsAsync();
-        Task<TimeLog> ReadTimeLogByIdAsync(int id);
-        Task<TimeLog> UpdateTimeLogHourExitAsync(int id);
+        Task<IEnumerable<TimeLog>> ReadTimeLogsByContractIdAsync(int id);
+        Task<TimeLog> UpdateTimeLogHourExitAsync(TimeLog timeLog);
         Task<TimeLog> DeleteTimeLogAsync(int id);
     }
 }

@@ -7,16 +7,16 @@ namespace Application.DTOs
     public class TimeLogDTO
     {
         [DisplayName("Start Time")]
-        public DateTime StartTime { get; private set; }
+        public DateTime StartTime { get; set; }
 
         [DisplayName("End Time")]
-        public DateTime EndTime { get; private set; }
+        public DateTime EndTime { get; set; }
 
         [DisplayName("Hours")]
-        public double? Hours { get; private set; }
+        public double? Hours { get; set; }
 
         [DisplayName("Contract")]
-        public int ContractId { get; private set; }
+        public int ContractId { get; set; }
 
         [JsonIgnore]
         public Contract? Contract { get; set; }

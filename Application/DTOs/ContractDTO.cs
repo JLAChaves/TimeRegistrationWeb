@@ -20,12 +20,12 @@ namespace Application.DTOs
 
         [Required(ErrorMessage = "Value Is Required")]
         [DisplayName("Value Per Hour")]
-        public double ValuePerHour { get; private set; }
+        public double ValuePerHour { get; set; }
 
         [DisplayName("Total Value")]
-        public double? TotalValue { get; private set; }
+        public double? TotalValue { get; set; }
 
         [DisplayName("Total Hours")]
-        public double? TotalHours { get; private set; }
+        public double? TotalHours { get; set; }
     }
 }

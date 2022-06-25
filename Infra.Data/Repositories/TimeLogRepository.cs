@@ -14,11 +14,22 @@ namespace Infra.Data.Repositories
         }
         public async Task<TimeLog> CreateTimeLogAsync(int id)
         {
-            TimeLog timeLog = new TimeLog(DateTime.Now, DateTime.Now, id);
-            timeLog.UpdateHours(0);
-            _timeLogContext.TimeLogs.Update(timeLog);
-            await _timeLogContext.SaveChangesAsync();
-            return timeLog;            
+            var actualTimeLog = _timeLogContext.TimeLogs.FirstOrDefault(p => p.IsActual == true && p.ContractId == id);
+
+            if (actualTimeLog == null)
+            {
+                TimeLog timeLog = new TimeLog(DateTime.Now, DateTime.Now, id);
+                timeLog.UpdateHours(0);
+                _timeLogContext.TimeLogs.Update(timeLog);
+                await _timeLogContext.SaveChangesAsync();
+                return timeLog;
+            }
+            else
+            {
+                await UpdateTimeLogHourExitAsync(actualTimeLog);
+                await _timeLogContext.SaveChangesAsync();
+                return actualTimeLog;
+            }                        
         }
 
         public async Task<IEnumerable<TimeLog>> ReadTimeLogsAsync()
@@ -26,18 +37,17 @@ namespace Infra.Data.Repositories
             return await _timeLogContext.TimeLogs.ToListAsync();
         }
 
-        public async Task<TimeLog> ReadTimeLogByIdAsync(int id)
+        public async Task<IEnumerable<TimeLog>> ReadTimeLogsByContractIdAsync(int id)
         {
-            return await _timeLogContext.TimeLogs.FindAsync(id);
+            return await _timeLogContext.TimeLogs.Where(p => p.ContractId == id).OrderByDescending(p => p.Id).ToListAsync();
         }
 
-        public async Task<TimeLog> UpdateTimeLogHourExitAsync(int id)
+        public async Task<TimeLog> UpdateTimeLogHourExitAsync(TimeLog timeLog)
         {
-            var timeLogExit = await _timeLogContext.TimeLogs.FindAsync(id);
-            HourExit(timeLogExit);
-            _timeLogContext.Update(timeLogExit);
+            HourExit(timeLog);
+            _timeLogContext.Update(timeLog);
             await _timeLogContext.SaveChangesAsync();
-            return timeLogExit;
+            return timeLog;
         }
         private void HourExit(TimeLog timeLog)
         {

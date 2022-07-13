@@ -56,16 +56,12 @@
                         @Html.DisplayFor(modelItem => item.TotalValue)
                     </td>
                     <td>
-                        <a asp-controller= "TimeLogs" asp-action="RegisterTimeLog" asp-route-id="@item.Id" title="Index" class="btn btn-warning">
+                        <a asp-controller= "TimeLogs" asp-action="RegisterTimeLog" asp-route-id="@item.Id" title="Index" class="btn btn-success">
                             <span class="fas fa-edit">Register TimeLog</span>
                         </a>
 
-                        <a asp-action="UpdateValue" asp-route-id="@item.Id" title="Index" class="btn btn-dark">
-                            <span class="fas fa-search">Update Value</span>
-                        </a>
-
                         <a asp-controller= "TimeLogs" asp-action="Index" asp-route-id="@item.Id" title="Index" class="btn btn-primary">
-                            <span class="fas fa-search">VerTimeLog</span>
+                            <span class="fas fa-search">Ver TimeLogs</span>
                         </a>
 
                         <a asp-action="Delete" asp-route-id="@item.Id" title="Delete" class="btn btn-danger">

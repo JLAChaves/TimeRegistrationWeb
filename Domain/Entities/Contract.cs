@@ -30,7 +30,7 @@ namespace Domain.Entities
         public Contract UpdateTotalValue(double? totalValue)
         {
             TotalValue = totalValue;
-            DomainExceptionValidation.When(this.TotalValue == null || this.TotalValue == 0,
+            DomainExceptionValidation.When(this.TotalValue == null,
                 "Value Not Updated!");
 
             return this;
@@ -39,7 +39,7 @@ namespace Domain.Entities
         public Contract UpdateTotalHours(double? totalHours)
         {
             TotalHours = totalHours;
-            DomainExceptionValidation.When(this.TotalHours == null || this.TotalHours == 0,
+            DomainExceptionValidation.When(this.TotalHours == null,
                 "Value Not Updated!");
 
             return this;

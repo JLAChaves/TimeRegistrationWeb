@@ -16,6 +16,10 @@ namespace WebUi.Controllers
         public async Task<IActionResult> Index(int id)
         {
             var timeLog = await _timeLogService.ReadTimeLogsDTOByIdAsync(id);
+            if (timeLog.FirstOrDefault() == null)
+            {
+                return RedirectToAction("Index", "Contracts");
+            }
             return View(timeLog);
         }
 

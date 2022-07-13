@@ -15,6 +15,7 @@ namespace WebUi.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            await UpdateValue();
             var contracts = await _contractService.ReadContracsDTOAsync();
             return View(contracts);
         }
@@ -31,22 +32,36 @@ namespace WebUi.Controllers
             if (ModelState.IsValid)
             {
                 await _contractService.CreateContractDTOAsync(contract);
+                RedirectToAction(nameof(Index));
                 return RedirectToAction(nameof(Index));
             }
             return View(contract);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> UpdateValue(int id)
+        //[HttpGet]
+        //public async Task<IActionResult> UpdateValue(int id)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        await _contractService.UpdateContractDTOTotalHoursAsync(id);
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    else
+        //    {
+        //        return BadRequest();
+        //    }
+        //    return View();
+        //}  
+
+        public async Task UpdateValue()
         {
-            if (ModelState.IsValid)
+            var contracts = await _contractService.ReadContracsDTOAsync();
+            foreach (var item in contracts)
             {
-                await _contractService.UpdateContractDTOTotalHoursAsync(id);
-                return RedirectToAction(nameof(Index));
-            }
-            return View();
-        }  
-        
+                await _contractService.UpdateContractDTOTotalHoursAsync(item.Id);
+            }           
+        }
+
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
